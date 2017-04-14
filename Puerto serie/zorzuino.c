@@ -90,5 +90,43 @@ uint8_t timer0_count(void){
 	return TCNT0;
 }
 
+/*********************** UART ***********************/
 
+/**
+@name: USART_init
+@note: Esta función inicializa la USART.
+*/
+void USART_init( void ){
+	/* Set baud rate */
+	UBRRH = (unsigned char)(UART_UBRR>>8);
+	UBRRL = (unsigned char)UART_UBRR;
+	
+	/* Enable receiver and transmitter */
+	UCSRB = (1<<RXEN)|(1<<TXEN);
+	
+	/* Set frame format: 8data, 2stop bit */
+	UCSRC = (1<<URSEL)|(1<<USBS)|(3<<UCSZ0);
+}
 
+/**
+@name: USART_transmit
+@note: Esta función transmite un char por la USART.
+*/
+void USART_transmit( unsigned char data ){
+	/* Wait for empty transmit buffer */
+	while ( !( UCSRA & (1<<UDRE)) )
+	;
+	/* Put data into buffer, sends the data */
+	UDR = data;
+}
+/**
+@name: USART_receive
+@note: Esta función recibe un char por la USART.
+*/
+unsigned char USART_receive( void ){
+	/* Wait for data to be received */
+	while ( !(UCSRA & (1<<RXC)) )
+	;
+	/* Get and return received data from buffer */
+return UDR;
+}

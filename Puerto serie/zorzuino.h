@@ -39,4 +39,15 @@ BOOL read_button(void);
 void timer0_init(uint8_t prescaler, uint8_t init_counter, BOOL int_en);
 uint8_t timer0_count(void);
 
+/********************************************************************/
+//UART
+#define FOSC 16000000// Clock Speed
+#define UART_BAUD 9600
+#define UART_UBRR FOSC/16/UART_BAUD-1
+
+void USART_init( void );
+void USART_transmit( unsigned char data );
+unsigned char USART_receive( void );
+
+
 #endif
