@@ -48,7 +48,7 @@ uint8_t timer0_count(void);
 void USART_init( void );
 void USART_transmit( unsigned char data );
 unsigned char USART_receive( void );
-void USART_send_string( unsigned char data[] , size_t length );
+void USART_send_string( unsigned char data[] );
 
 /********************************************************************/
 //ADC

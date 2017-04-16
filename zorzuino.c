@@ -139,13 +139,17 @@ return UDR;
 
 /**
 @name: USART_send_string
-@note: Esta función transmite una cadena de chars por la USART.
+@note: Esta función transmite una cadena de chars por la USART. La 
+	cadena debe terminar con un '\0'.
 */
-void USART_send_string( unsigned char data[] , size_t length ){
+void USART_send_string( unsigned char data[] ){
 	size_t i=0;
 	
-	for( i=0 ; i < length ; i++ )
+	while( data[i] != '\0' ){
 		USART_transmit( data[i] );
+		i++;
+	}
+	USART_transmit( '\0' );
 }
 
 //-------------------------------------------------------

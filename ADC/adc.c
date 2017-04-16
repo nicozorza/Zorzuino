@@ -1,42 +1,29 @@
 #include "adc.h"
 
-volatile int aux=0;
+volatile int asd=0;
 volatile uint16_t convertion;
-
-int char_to_int( uint8_t num ){
-
-	int aux=0;
-	
-	aux+=num&(1<<0);
-	aux+=(num&(1<<1))*2;
-	aux+=(num&(1<<2))*4;
-	aux+=(num&(1<<3))*8;
-	aux+=(num&(1<<4))*16;
-	aux+=(num&(1<<5))*32;
-	aux+=(num&(1<<6))*64;
-	aux+=(num&(1<<7))*128;
-return aux;
-}
-
-
+volatile unsigned char buf[7]={0};
 ISR(ADC_vect){
 	
-	int aux;
-	convertion=ADC_get_convertion();
-	aux=char_to_int( convertion&0x0F );
-	USART_transmit( aux>>8 );
-	USART_transmit( aux&0x0F );
-	USART_transmit( '\r' );
-	USART_transmit( '\n' );
-/*	USART_transmit( '\0' );*/
-	ADC_start_convertion();
-	aux++;
+	unsigned int aux;
 	
-	if( aux%100 == 0)
+	
+	
+	aux=ADC_get_convertion();
+
+	USART_send_string( (unsigned char*)utoa(aux, buf, 10) );
+	USART_transmit('\n');
+	USART_transmit('\r');
+	ADC_start_convertion();
+	asd++;
+	
+	if( asd%100 == 0)
 		toggle_led1();
 }
 
 int main( void ){
+	float t=0;
+	unsigned int aux;
 	init_leds( (1<<LED1)|(1<<LED2) , 0 );
 	USART_init();
 	init_ADC(0x00);	//Init AD0
@@ -44,7 +31,15 @@ int main( void ){
 	ADC_start_convertion();
 	
 	sei();
-	while(1);
+	while(1){
+/*		aux=1024*sin(t/2)*sin(t/2);*/
+/*		t+=0.1;*/
+/*		if( t >= 6.28 )*/
+/*			t=0;*/
+/*		USART_send_string( (unsigned char*)utoa(aux, buf, 10) );*/
+/*		USART_transmit('\n');*/
+/*		USART_transmit('\r');*/
+	}
 
 return 0;
 }
