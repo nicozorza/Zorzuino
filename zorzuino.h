@@ -41,13 +41,14 @@ uint8_t timer0_count(void);
 
 /********************************************************************/
 //UART
-#define FOSC 16000000// Clock Speed
-#define UART_BAUD 9600
-#define UART_UBRR FOSC/16/UART_BAUD-1
+#define F_CPU 16000000				// Clock Speed
+#define BAUD 9600				// define baud
+#define BAUDRATE ((F_CPU)/(BAUD*16UL)-1)	// set baud rate value for UBRR
 
 void USART_init( void );
 void USART_transmit( unsigned char data );
 unsigned char USART_receive( void );
+void USART_send_string( unsigned char data[] , size_t length );
 
 /********************************************************************/
 //ADC
