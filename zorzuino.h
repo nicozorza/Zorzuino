@@ -49,5 +49,11 @@ void USART_init( void );
 void USART_transmit( unsigned char data );
 unsigned char USART_receive( void );
 
+/********************************************************************/
+//ADC
+
+void init_ADC( uint8_t channel_mask );
+uint16_t ADC_get_convertion( void );
+void ADC_start_convertion( void );
 
 #endif

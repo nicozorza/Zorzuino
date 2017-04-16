@@ -1,4 +1,4 @@
-NAME = serial
+NAME = adc
 
 compilar:
 	avr-gcc -g -Os -mmcu=atmega16 -c *.c 
