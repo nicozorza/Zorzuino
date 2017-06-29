@@ -1,49 +1,32 @@
-#include <stdlib.h>
-#include <avr/io.h>
-#include <avr/interrupt.h>
-#include <stdio.h>
+#include "zorzuino_tmr_0.h"
 
 
 volatile int aux=0;
 
-void timer0_init()
-{
-    // set up timer with 1024 prescaling
-    TCCR0 = (1<<CS02) | (1<<CS00);
-  
-    // initialize counter
-    TCNT0 = 0;
-    
-    // enable overflow interrupt
-    TIMSK |= (1 << TOIE0);
-}
-
 ISR(TIMER0_OVF_vect)
 {
-	if( aux%5 == 0)
-		PORTB ^= (1<<PB0);
+	if( aux%10000 == 0)
+		toggle_led1();
 	aux++;
 }
 
 
 int main()
 {	
+	
+	init_leds((1<<LED1)|(1<<LED2),0);
+	init_button();
 
-	DDRB |= (1<<PB0) | (1<<PB1); //PB0 y PB1 como salidas
-	PORTB |= (1<<PB0) | (1<<PB1);  //Se encienden los leds
-	PORTB &= ~(1<<PB2);		//PB2 como entrada
-
-	timer0_init();
+	timer0_init(TMR0_PRESC_0,0,TRUE);
 	
 	sei(); // Enable global interrupts
 	
 	while(1){
 	
-		if( (PINB&(1<<PB2)) == 0 )
-			PORTB |= (1<<PB1);
+		if( read_button() == TRUE )
+			set_led2();
 		else
-			PORTB &= ~(1<<PB1);
-	
+			clear_led2();
 	}
 	
 return 0; 
