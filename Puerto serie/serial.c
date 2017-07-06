@@ -2,8 +2,8 @@
 
 
 volatile int aux=0;
-char received='a';
-
+unsigned char received[10]={0};
+unsigned char c;
 
 /*ISR(TIMER0_OVF_vect)*/
 /*{*/
@@ -15,8 +15,10 @@ char received='a';
 
 ISR(USART_RXC_vect)
 {
-	received=USART_receive();
-	USART_transmit(received);
+	USART_receive_string( received , sizeof(received)/sizeof(char) );
+	USART_send_string(received);
+	//c=USART_receive();
+	//USART_transmit(c);
 	toggle_led2();
 }
 

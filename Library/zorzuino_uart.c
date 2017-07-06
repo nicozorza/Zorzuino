@@ -56,3 +56,24 @@ void USART_send_string( unsigned char *data ){
 	}
 	USART_transmit( '\0' );
 }
+
+/**
+@name: USART_receive_string
+@param data: Puntero al buffer donde se almacena la cadena.
+@param max_length: Longitud maxima del buffer.
+@note: Esta funcion recibe una cadena por el puerto serie. La longitud
+	del buffer debe alcanzar para la cadena a recibir.
+*/
+void USART_receive_string( unsigned char *data , char max_length ){
+	
+	int i=0;
+	
+	while( i<max_length ){
+	
+		data[i]=USART_receive();
+		if( data[i] == '\0' || data[i] == '\n' )
+			return;
+		i++;
+	}
+return;
+}

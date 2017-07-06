@@ -13,6 +13,7 @@ void USART_init( void );
 void USART_transmit( unsigned char data );
 unsigned char USART_receive( void );
 void USART_send_string( unsigned char data[] );
+void USART_receive_string(unsigned char *data,char max_length);
 
 
 
