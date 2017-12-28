@@ -6,3 +6,9 @@ Después de luchar un rato logré cargar el firmware del modulo:
 
 Un link piola sobre todo esto es: https://www.allaboutcircuits.com/projects/update-the-firmware-in-your-esp8266-wi-fi-module/
 En la carpeta de hojas de datos también hay información.
+
+Para utilizar el ESP07 con comandos AT, se debe conectar de la siguiente manera:
+- EN, RST, VCC -> 3.3v
+- GND, G15 -> GND
+- Tx -> Rx
+- Rx -> Tx
