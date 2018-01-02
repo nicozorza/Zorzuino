@@ -21,4 +21,4 @@ Luego de luchar mucho con el módulo ESP07, logré cargar código de manera dire
 - Flash Frequency: 40MHz
 - CPU Frequency: 80MHz
 - Upload speed: 115200
-- Flash size: 4M
+- Flash size: 1M
