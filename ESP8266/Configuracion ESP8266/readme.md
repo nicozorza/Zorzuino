@@ -12,3 +12,13 @@ Para utilizar el ESP07 con comandos AT, se debe conectar de la siguiente manera:
 - GND, G15 -> GND
 - Tx -> Rx
 - Rx -> Tx
+- El pin GPIO0 se debe conectar a GND para cargar el firmware o a VCC para el funcionamiento normal.
+
+Luego de luchar mucho con el módulo ESP07, logré cargar código de manera directa utilizando la siguiente configuración:
+- Placa: Generic ESP8266 Module
+- Flash mode: DIO
+- Crystal Frequency: 40MHz
+- Flash Frequency: 40MHz
+- CPU Frequency: 80MHz
+- Upload speed: 115200
+- Flash size: 4M
