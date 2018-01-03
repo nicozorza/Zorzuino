@@ -22,3 +22,5 @@ Luego de luchar mucho con el módulo ESP07, logré cargar código de manera dire
 - CPU Frequency: 80MHz
 - Upload speed: 115200
 - Flash size: 1M
+
+Un link MUY piola es este: https://tttapa.github.io/ESP8266/Chap01%20-%20ESP8266.html. Agregué el libro en pdf para no perderlo nunca porque es muy completo.
